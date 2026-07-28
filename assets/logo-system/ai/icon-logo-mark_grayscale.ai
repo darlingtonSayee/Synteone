@@ -1,0 +1,22 @@
+%!PS-Adobe-3.0 EPSF-3.0
+%%Title: Synteone icon-logo-mark grayscale
+%%Creator: Synteone logo system generator
+%%BoundingBox: 0 0 512 512
+%%LanguageLevel: 2
+%%EndComments
+1 setlinecap 1 setlinejoin
+0.1843 0.2000 0.2157 setrgbcolor
+20.06 setlinewidth
+newpath 197.48 326.22 93.63 0 360 arc closepath stroke
+0.4314 0.4549 0.4784 setrgbcolor
+20.06 setlinewidth
+newpath 314.52 326.22 93.63 0 360 arc closepath stroke
+0.6510 0.6706 0.6902 setrgbcolor
+20.06 setlinewidth
+newpath 256.00 214.20 93.63 0 360 arc closepath stroke
+0.1843 0.2000 0.2157 setrgbcolor
+newpath 256.00 276.06 50.16 0 360 arc closepath fill
+0.4314 0.4549 0.4784 setrgbcolor
+newpath 256.00 276.06 20.06 0 360 arc closepath fill
+showpage
+%%EOF

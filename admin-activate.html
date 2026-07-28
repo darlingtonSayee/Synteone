@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="robots" content="noindex,nofollow" />
+    <title>Admin Access | Synteone</title>
+    <link rel="icon" href="assets/logo-system/favicon/favicon.svg" type="image/svg+xml" />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body class="admin-body">
+    <main class="admin-shell" id="main">
+      <section class="admin-login">
+        <a class="wordmark" href="index.html"><span>Synte</span><strong>ONE</strong></a>
+        <h1 data-access-title>Set admin password</h1>
+        <p>Use a strong password to protect the Synteone admin workspace.</p>
+        <form class="admin-form" data-access-form>
+          <label>
+            New password
+            <input type="password" name="password" autocomplete="new-password" minlength="10" required />
+          </label>
+          <label>
+            Confirm password
+            <input type="password" name="confirmPassword" autocomplete="new-password" minlength="10" required />
+          </label>
+          <button class="button button-primary" type="submit">Save password</button>
+          <p class="admin-message" data-access-message role="status"></p>
+        </form>
+      </section>
+    </main>
+    <script src="admin-activate.js"></script>
+  </body>
+</html>

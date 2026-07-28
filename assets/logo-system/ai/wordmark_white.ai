@@ -1,0 +1,15 @@
+%!PS-Adobe-3.0 EPSF-3.0
+%%Title: Synteone wordmark white
+%%Creator: Synteone logo system generator
+%%BoundingBox: 0 0 1000 240
+%%LanguageLevel: 2
+%%EndComments
+1 setlinecap 1 setlinejoin
+1.0000 1.0000 1.0000 setrgbcolor
+/Helvetica findfont 118 scalefont setfont
+72.00 84.00 moveto (Synte) show
+1.0000 1.0000 1.0000 setrgbcolor
+/Helvetica-Bold findfont 118 scalefont setfont
+384.70 84.00 moveto (ONE) show
+showpage
+%%EOF

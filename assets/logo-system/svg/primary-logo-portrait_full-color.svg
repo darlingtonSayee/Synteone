@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1080 1350" width="1080" height="1350" role="img" aria-label="Synteone primary-logo-portrait full-color">
+  
+  <rect width="1080" height="1350" fill="#FFFFFF"/>
+    <g transform="translate(285 205) scale(1.9921875)" fill="none" stroke-linecap="round" stroke-linejoin="round">
+      <circle cx="93" cy="86" r="56" stroke="#1E3A5F" stroke-width="12"/>
+      <circle cx="163" cy="86" r="56" stroke="#2DB7B5" stroke-width="12"/>
+      <circle cx="128" cy="153" r="56" stroke="#8A8D91" stroke-width="12"/>
+      <circle cx="128" cy="116" r="30" fill="#1E3A5F" stroke="none"/>
+      <circle cx="128" cy="116" r="12" fill="#2DB7B5" stroke="none"/>
+    </g>
+    <g>
+      <text x="154" y="875" fill="#1E3A5F" font-family="Arial, Helvetica, sans-serif" font-size="122" font-weight="400">Synte</text>
+      <text x="477.3" y="875" fill="#122A46" font-family="Arial, Helvetica, sans-serif" font-size="122" font-weight="800">ONE</text>
+      <text x="158" y="968" fill="#8A8D91" font-family="Arial, Helvetica, sans-serif" font-size="38" font-weight="700">One company. Multiple brands. One vision.</text>
+    </g>
+</svg>

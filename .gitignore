@@ -1,0 +1,10 @@
+qa/
+*.log
+.env
+.env.local
+data/admin-users.json
+data/messages.json
+uploads/
+assets/synteone-hero.png
+assets/gotravel/
+dist/

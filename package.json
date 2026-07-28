@@ -1,0 +1,14 @@
+{
+  "name": "synteone-site",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Official Synteone website with admin-managed projects.",
+  "scripts": {
+    "build": "node scripts/build-cloudflare-pages.js",
+    "start": "node server.js",
+    "cf:d1:create": "wrangler d1 create synteone-cms",
+    "cf:d1:migrate": "wrangler d1 migrations apply synteone-cms --remote",
+    "cf:dev": "npm run build && wrangler pages dev dist",
+    "cf:deploy": "npm run build && wrangler pages deploy dist --project-name synteone"
+  }
+}

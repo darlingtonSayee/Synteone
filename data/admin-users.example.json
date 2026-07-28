@@ -1,0 +1,9 @@
+{
+  "users": [
+    {
+      "email": "admin@synteone.com",
+      "password": "replace-with-a-strong-password",
+      "role": "super_admin"
+    }
+  ]
+}

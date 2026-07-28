@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 1200" width="1600" height="1200">
+  <rect width="1600" height="1200" fill="#F5F8FB"/>
+  <text x="80" y="110" fill="#1E3A5F" font-family="Arial, Helvetica, sans-serif" font-size="54" font-weight="800">Synteone Logo System</text>
+  <text x="80" y="158" fill="#8A8D91" font-family="Arial, Helvetica, sans-serif" font-size="26" font-weight="700">Primary, secondary, mark, wordmark, monogram, color modes, and social/app formats</text>
+  <rect x="80" y="220" width="1440" height="280" fill="#FFFFFF"/>
+  <g transform="translate(170 150) scale(.78)">
+  
+  
+    <g transform="translate(80 82) scale(0.9765625)" fill="none" stroke-linecap="round" stroke-linejoin="round">
+      <circle cx="93" cy="86" r="56" stroke="#1E3A5F" stroke-width="12"/>
+      <circle cx="163" cy="86" r="56" stroke="#2DB7B5" stroke-width="12"/>
+      <circle cx="128" cy="153" r="56" stroke="#8A8D91" stroke-width="12"/>
+      <circle cx="128" cy="116" r="30" fill="#1E3A5F" stroke="none"/>
+      <circle cx="128" cy="116" r="12" fill="#2DB7B5" stroke="none"/>
+    </g>
+    <g>
+      <text x="390" y="186" fill="#1E3A5F" font-family="Arial, Helvetica, sans-serif" font-size="94" font-weight="400">Synte</text>
+      <text x="639.1" y="186" fill="#122A46" font-family="Arial, Helvetica, sans-serif" font-size="94" font-weight="800">ONE</text>
+      <text x="394" y="252" fill="#8A8D91" font-family="Arial, Helvetica, sans-serif" font-size="29" font-weight="700">One company. Multiple brands. One vision.</text>
+    </g>
+</g>
+
+  <rect x="80" y="560" width="320" height="320" fill="#FFFFFF"/>
+  
+    <g transform="translate(118 598) scale(0.953125)" fill="none" stroke-linecap="round" stroke-linejoin="round">
+      <circle cx="93" cy="86" r="56" stroke="#1E3A5F" stroke-width="12"/>
+      <circle cx="163" cy="86" r="56" stroke="#2DB7B5" stroke-width="12"/>
+      <circle cx="128" cy="153" r="56" stroke="#8A8D91" stroke-width="12"/>
+      <circle cx="128" cy="116" r="30" fill="#1E3A5F" stroke="none"/>
+      <circle cx="128" cy="116" r="12" fill="#2DB7B5" stroke="none"/>
+    </g>
+  <rect x="440" y="560" width="500" height="320" fill="#FFFFFF"/>
+  
+    <g>
+      <text x="495" y="744" fill="#1E3A5F" font-family="Arial, Helvetica, sans-serif" font-size="82" font-weight="400">Synte</text>
+      <text x="712.3" y="744" fill="#122A46" font-family="Arial, Helvetica, sans-serif" font-size="82" font-weight="800">ONE</text>
+      
+    </g>
+  <rect x="980" y="560" width="260" height="320" fill="#1E3A5F"/>
+  
+    <g transform="translate(1010 588) scale(0.78125)" fill="none" stroke-linecap="round" stroke-linejoin="round">
+      <circle cx="93" cy="86" r="56" stroke="#FFFFFF" stroke-width="12"/>
+      <circle cx="163" cy="86" r="56" stroke="#FFFFFF" stroke-width="12"/>
+      <circle cx="128" cy="153" r="56" stroke="#FFFFFF" stroke-width="12"/>
+      <circle cx="128" cy="116" r="30" fill="#FFFFFF" stroke="none"/>
+      <circle cx="128" cy="116" r="12" fill="#FFFFFF" stroke="none"/>
+    </g>
+  <rect x="1280" y="560" width="240" height="320" fill="#FFFFFF"/>
+  
+    <g transform="translate(1306 604)">
+      <circle cx="73.32000000000001" cy="35.72" r="10.34" fill="none" stroke="#1E3A5F" stroke-width="4.7"/>
+      <circle cx="94" cy="35.72" r="10.34" fill="none" stroke="#2DB7B5" stroke-width="4.7"/>
+      <circle cx="83.66" cy="54.519999999999996" r="10.34" fill="none" stroke="#8A8D91" stroke-width="4.7"/>
+      <circle cx="83.66" cy="43.24" r="6.016" fill="#1E3A5F"/>
+      <text x="94" y="129.72" text-anchor="middle" fill="#1E3A5F" font-family="Arial, Helvetica, sans-serif" font-size="94" font-weight="800">S1</text>
+    </g>
+  <text x="80" y="975" fill="#1E3A5F" font-family="Arial, Helvetica, sans-serif" font-size="30" font-weight="800">Palette</text>
+  <rect x="80" y="1015" width="170" height="72" fill="#1E3A5F"/><text x="80" y="1128" fill="#1E3A5F" font-family="Arial, Helvetica, sans-serif" font-size="20" font-weight="700">navy: #1E3A5F</text><rect x="310" y="1015" width="170" height="72" fill="#122A46"/><text x="310" y="1128" fill="#1E3A5F" font-family="Arial, Helvetica, sans-serif" font-size="20" font-weight="700">ink: #122A46</text><rect x="540" y="1015" width="170" height="72" fill="#2DB7B5"/><text x="540" y="1128" fill="#1E3A5F" font-family="Arial, Helvetica, sans-serif" font-size="20" font-weight="700">teal: #2DB7B5</text><rect x="770" y="1015" width="170" height="72" fill="#8A8D91"/><text x="770" y="1128" fill="#1E3A5F" font-family="Arial, Helvetica, sans-serif" font-size="20" font-weight="700">gray: #8A8D91</text><rect x="1000" y="1015" width="170" height="72" fill="#050505"/><text x="1000" y="1128" fill="#1E3A5F" font-family="Arial, Helvetica, sans-serif" font-size="20" font-weight="700">black: #050505</text>
+</svg>

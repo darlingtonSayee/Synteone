@@ -1,0 +1,23 @@
+%!PS-Adobe-3.0 EPSF-3.0
+%%Title: Synteone monogram-s1 white
+%%Creator: Synteone logo system generator
+%%BoundingBox: 0 0 512 512
+%%LanguageLevel: 2
+%%EndComments
+1 setlinecap 1 setlinejoin
+1.0000 1.0000 1.0000 setrgbcolor
+10.00 setlinewidth
+newpath 212.00 381.00 22.00 0 360 arc closepath stroke
+1.0000 1.0000 1.0000 setrgbcolor
+10.00 setlinewidth
+newpath 256.00 381.00 22.00 0 360 arc closepath stroke
+1.0000 1.0000 1.0000 setrgbcolor
+10.00 setlinewidth
+newpath 234.00 341.00 22.00 0 360 arc closepath stroke
+1.0000 1.0000 1.0000 setrgbcolor
+newpath 234.00 365.00 13.00 0 360 arc closepath fill
+1.0000 1.0000 1.0000 setrgbcolor
+/Helvetica-Bold findfont 202 scalefont setfont
+139.00 179.00 moveto (S1) show
+showpage
+%%EOF

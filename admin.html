@@ -1,0 +1,667 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="robots" content="noindex,nofollow" />
+    <title>Synteone Admin</title>
+    <link rel="icon" href="assets/logo-system/favicon/favicon.svg" type="image/svg+xml" />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body class="admin-body">
+    <main class="admin-shell" id="main">
+      <section class="admin-login" data-login-panel>
+        <a class="wordmark" href="index.html"><span>Synte</span><strong>ONE</strong></a>
+        <h1>Admin</h1>
+        <p>Manage our projects, homepage copy, advertisement, logo, and video.</p>
+        <form class="admin-form" data-login-form>
+          <label>
+            Email
+            <input type="email" name="email" autocomplete="username" required />
+          </label>
+          <label>
+            Password
+            <input type="password" name="password" autocomplete="current-password" required />
+          </label>
+          <button class="button button-primary" type="submit">Sign in</button>
+          <button class="button button-secondary" type="button" data-reset-request>Request password reset</button>
+          <p class="admin-message" data-login-message role="status"></p>
+        </form>
+      </section>
+
+      <section class="admin-dashboard" data-dashboard hidden>
+        <header class="admin-topbar">
+          <div>
+            <a class="wordmark" href="index.html"><span>Synte</span><strong>ONE</strong></a>
+            <p><span data-role-label></span> admin</p>
+          </div>
+          <div class="admin-actions">
+            <a class="button button-secondary" href="index.html">View site</a>
+            <a class="button button-secondary" href="projects.html">View projects</a>
+            <button class="button button-secondary" type="button" data-logout>Sign out</button>
+          </div>
+        </header>
+
+        <div class="admin-intro">
+          <div>
+            <p class="kicker">Admin workspace</p>
+            <h1>Make real site updates without touching code.</h1>
+          </div>
+        </div>
+
+        <nav class="admin-tabs" aria-label="Admin sections">
+          <button type="button" data-tab-button="projects">Projects</button>
+          <button type="button" data-tab-button="pages">Pages</button>
+          <button type="button" data-tab-button="site">Site copy</button>
+          <button type="button" data-tab-button="media">Logo and video</button>
+          <button type="button" data-tab-button="ads">Advertisement</button>
+          <button type="button" data-tab-button="messages">Messages</button>
+          <button type="button" data-tab-button="emailjs">EmailJS</button>
+          <button type="button" data-tab-button="ai">AI</button>
+          <button type="button" data-tab-button="users">Admin users</button>
+        </nav>
+
+        <section class="admin-panel" data-tab-panel="projects">
+          <div class="panel-heading">
+            <div>
+              <p class="kicker">Project content</p>
+              <h2>Manage what appears on the Projects page.</h2>
+            </div>
+            <button class="button button-primary" type="button" data-add-project>Add project</button>
+          </div>
+          <div class="admin-table-wrap">
+            <table class="admin-table">
+              <thead>
+                <tr>
+                  <th>Name</th>
+                  <th>Status</th>
+                  <th>Last updated</th>
+                  <th>Order</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody data-admin-projects></tbody>
+            </table>
+            <div class="admin-empty" data-admin-empty hidden>
+              <h2>No projects yet.</h2>
+              <p>Add the first project when we are ready to announce it.</p>
+            </div>
+          </div>
+        </section>
+
+        <section class="admin-panel" data-tab-panel="pages" hidden>
+          <div class="panel-heading">
+            <div>
+              <p class="kicker">Pages and text</p>
+              <h2>Add pages, rewrite text, preview, then publish.</h2>
+            </div>
+            <button class="button button-primary" type="button" data-new-page>New page</button>
+          </div>
+          <form class="admin-form settings-form page-editor" data-page-form>
+            <label>
+              Page type
+              <select name="pageType" data-page-type>
+                <option value="standard">Standard Page</option>
+                <option value="team">Meet Our Team</option>
+                <option value="services">Services</option>
+                <option value="projects">Projects</option>
+                <option value="contact">Contact</option>
+                <option value="faq">FAQ</option>
+                <option value="testimonials">Testimonials</option>
+                <option value="gallery">Gallery</option>
+                <option value="careers">Careers</option>
+                <option value="custom">Custom Page</option>
+              </select>
+            </label>
+            <label>
+              Page title
+              <input name="title" placeholder="Meet our team" />
+            </label>
+            <label>
+              URL slug
+              <input name="slug" placeholder="meet-our-team" />
+            </label>
+            <label>
+              Navigation label
+              <input name="navLabel" placeholder="Team" />
+            </label>
+            <label>
+              Intro text
+              <textarea name="intro" rows="3"></textarea>
+            </label>
+            <label>
+              SEO title
+              <input name="seoTitle" />
+            </label>
+            <label>
+              Meta description
+              <textarea name="metaDescription" rows="3"></textarea>
+            </label>
+            <label>
+              Layout
+              <select name="layout">
+                <option value="standard">Standard</option>
+                <option value="wide">Wide</option>
+                <option value="landing">Landing</option>
+              </select>
+            </label>
+            <label>
+              Featured image
+              <input name="featuredImage" placeholder="uploads/team.webp" />
+            </label>
+            <label>
+              Upload featured image
+              <input name="featuredImageFile" type="file" accept=".svg,.png,.jpg,.jpeg,.webp,image/*" />
+            </label>
+            <label>
+              Body text fallback
+              <textarea name="body" rows="4"></textarea>
+            </label>
+            <div class="rich-editor-wrap">
+              <div class="rich-toolbar" aria-label="Rich text toolbar">
+                <button type="button" data-rich-command="bold">B</button>
+                <button type="button" data-rich-command="italic">I</button>
+                <button type="button" data-rich-command="formatBlock" data-rich-value="h2">H2</button>
+                <button type="button" data-rich-command="formatBlock" data-rich-value="p">P</button>
+                <button type="button" data-rich-command="insertUnorderedList">List</button>
+                <button type="button" data-rich-link>Link</button>
+              </div>
+              <div class="rich-editor" data-rich-editor contenteditable="true" aria-label="Rich page content"></div>
+            </div>
+            <div class="structured-editor" data-structured-editor></div>
+            <label>
+              Source URL for AI enhancement
+              <input name="sourceUrl" type="url" placeholder="https://example.com" />
+            </label>
+            <label class="checkbox-row">
+              <input type="checkbox" name="published" />
+              Publish this page and show it in navigation
+            </label>
+            <div class="admin-actions">
+              <button class="button button-secondary" type="button" data-enhance-page>Enhance with AI</button>
+              <button class="button button-secondary" type="button" data-preview-page>Preview page</button>
+              <button class="button button-primary" type="submit">Save page</button>
+              <button class="button button-secondary" type="button" data-delete-page>Delete page</button>
+            </div>
+            <p class="admin-message" data-page-message role="status"></p>
+          </form>
+          <div class="admin-table-wrap">
+            <table class="admin-table">
+              <thead>
+                <tr>
+                  <th>Page</th>
+                  <th>Slug</th>
+                  <th>Type</th>
+                  <th>Status</th>
+                  <th>Last updated</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody data-admin-pages></tbody>
+            </table>
+          </div>
+        </section>
+
+        <section class="admin-panel" data-tab-panel="site" hidden>
+          <div class="panel-heading">
+            <div>
+              <p class="kicker">Homepage copy</p>
+              <h2>Edit the hero section.</h2>
+            </div>
+          </div>
+          <form class="admin-form settings-form" data-settings-form="hero">
+            <label>
+              Kicker
+              <input name="kicker" />
+            </label>
+            <label>
+              Headline
+              <textarea name="headline" rows="3"></textarea>
+            </label>
+            <label>
+              Hero copy
+              <textarea name="copy" rows="4"></textarea>
+            </label>
+            <hr />
+            <label>
+              Home what-we-do kicker
+              <input name="homeWhatKicker" />
+            </label>
+            <label>
+              Home what-we-do title
+              <textarea name="homeWhatTitle" rows="2"></textarea>
+            </label>
+            <label>
+              Home what-we-do body
+              <textarea name="homeWhatBody" rows="3"></textarea>
+            </label>
+            <label>
+              Home why kicker
+              <input name="homeWhyKicker" />
+            </label>
+            <label>
+              Home why title
+              <textarea name="homeWhyTitle" rows="2"></textarea>
+            </label>
+            <label>
+              Home why body one
+              <textarea name="homeWhyBodyOne" rows="3"></textarea>
+            </label>
+            <label>
+              Home why body two
+              <textarea name="homeWhyBodyTwo" rows="3"></textarea>
+            </label>
+            <label>
+              Home principles kicker
+              <input name="homePrinciplesKicker" />
+            </label>
+            <label>
+              Home principles title
+              <textarea name="homePrinciplesTitle" rows="2"></textarea>
+            </label>
+            <label>
+              Vision
+              <textarea name="homeVision" rows="3"></textarea>
+            </label>
+            <label>
+              Mission
+              <textarea name="homeMission" rows="3"></textarea>
+            </label>
+            <label>
+              Values
+              <textarea name="homeValues" rows="5"></textarea>
+            </label>
+            <label>
+              Home projects kicker
+              <input name="homeProjectsKicker" />
+            </label>
+            <label>
+              Home projects title
+              <textarea name="homeProjectsTitle" rows="2"></textarea>
+            </label>
+            <hr />
+            <label>
+              About hero title
+              <textarea name="aboutHeroTitle" rows="2"></textarea>
+            </label>
+            <label>
+              About hero intro
+              <textarea name="aboutHeroIntro" rows="3"></textarea>
+            </label>
+            <label>
+              About registered text
+              <input name="aboutRegisteredText" />
+            </label>
+            <label>
+              Products hero title
+              <textarea name="productsHeroTitle" rows="2"></textarea>
+            </label>
+            <label>
+              Products hero intro
+              <textarea name="productsHeroIntro" rows="3"></textarea>
+            </label>
+            <label>
+              Projects hero title
+              <textarea name="projectsHeroTitle" rows="2"></textarea>
+            </label>
+            <label>
+              Projects hero intro
+              <textarea name="projectsHeroIntro" rows="3"></textarea>
+            </label>
+            <label>
+              Contact hero title
+              <textarea name="contactHeroTitle" rows="2"></textarea>
+            </label>
+            <label>
+              Contact hero intro
+              <textarea name="contactHeroIntro" rows="3"></textarea>
+            </label>
+            <label>
+              Contact address
+              <textarea name="contactAddress" rows="2"></textarea>
+            </label>
+            <label>
+              Footer company line
+              <input name="footerCompanyLine" />
+            </label>
+            <button class="button button-secondary" type="button" data-preview-settings="hero">Preview homepage</button>
+            <button class="button button-primary" type="submit">Save site copy</button>
+            <p class="admin-message" data-settings-message="hero" role="status"></p>
+          </form>
+        </section>
+
+        <section class="admin-panel" data-tab-panel="media" hidden>
+          <div class="panel-heading">
+            <div>
+              <p class="kicker">Logo and video</p>
+              <h2>Control our brand media.</h2>
+            </div>
+          </div>
+          <form class="admin-form settings-form" data-settings-form="media">
+            <label>
+              Logo URL or path
+              <input name="logoUrl" placeholder="assets/logo.svg" />
+            </label>
+            <label>
+              Upload logo file
+              <input name="logoFile" type="file" accept=".svg,.png,.jpg,.jpeg,.webp,image/*" />
+            </label>
+            <label>
+              Homepage video URL or path
+              <input name="heroVideoUrl" placeholder="assets/hero-video.mp4" />
+            </label>
+            <label>
+              Upload homepage video
+              <input name="heroVideoFile" type="file" accept=".mp4,.webm,video/*" />
+            </label>
+            <label>
+              Social share image URL or path
+              <input name="socialImageUrl" placeholder="assets/synteone-social.svg" />
+            </label>
+            <button class="button button-secondary" type="button" data-preview-settings="media">Preview homepage</button>
+            <button class="button button-primary" type="submit">Save media</button>
+            <p class="admin-message" data-settings-message="media" role="status"></p>
+          </form>
+        </section>
+
+        <section class="admin-panel" data-tab-panel="ads" hidden>
+          <div class="panel-heading">
+            <div>
+              <p class="kicker">Advertisement</p>
+              <h2>Publish a company announcement or campaign block.</h2>
+            </div>
+          </div>
+          <form class="admin-form settings-form" data-settings-form="ads">
+            <label class="checkbox-row">
+              <input type="checkbox" name="announcementEnabled" />
+              Show top announcement banner
+            </label>
+            <label>
+              Banner label
+              <input name="announcementLabel" />
+            </label>
+            <label>
+              Banner text
+              <input name="announcementText" />
+            </label>
+            <label>
+              Banner link text
+              <input name="announcementLinkText" />
+            </label>
+            <label>
+              Banner link URL
+              <input name="announcementLinkUrl" />
+            </label>
+            <hr />
+            <label class="checkbox-row">
+              <input type="checkbox" name="adEnabled" />
+              Show homepage advertisement block
+            </label>
+            <label>
+              Advertisement title
+              <textarea name="adTitle" rows="3"></textarea>
+            </label>
+            <label>
+              Advertisement body
+              <textarea name="adBody" rows="4"></textarea>
+            </label>
+            <label>
+              Advertisement link text
+              <input name="adLinkText" />
+            </label>
+            <label>
+              Advertisement link URL
+              <input name="adLinkUrl" />
+            </label>
+            <button class="button button-secondary" type="button" data-preview-settings="ads">Preview homepage</button>
+            <button class="button button-primary" type="submit">Save advertisement</button>
+            <p class="admin-message" data-settings-message="ads" role="status"></p>
+          </form>
+        </section>
+
+        <section class="admin-panel" data-tab-panel="messages" hidden>
+          <div class="panel-heading">
+            <div>
+              <p class="kicker">Contact messages</p>
+              <h2>Review website enquiries stored from the contact form.</h2>
+            </div>
+            <button class="button button-secondary" type="button" data-refresh-messages>Refresh</button>
+          </div>
+          <div class="admin-table-wrap">
+            <table class="admin-table">
+              <thead>
+                <tr>
+                  <th>From</th>
+                  <th>Subject</th>
+                  <th>Message</th>
+                  <th>Email sent</th>
+                  <th>Received</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody data-admin-messages></tbody>
+            </table>
+          </div>
+        </section>
+
+        <section class="admin-panel" data-tab-panel="emailjs" hidden>
+          <div class="panel-heading">
+            <div>
+              <p class="kicker">Email delivery</p>
+              <h2>Configure EmailJS for contact, invitation, and reset emails.</h2>
+            </div>
+          </div>
+          <form class="admin-form settings-form" data-settings-form="emailjs">
+            <label class="checkbox-row">
+              <input type="checkbox" name="emailjsEnabled" />
+              Enable EmailJS sending
+            </label>
+            <label>
+              Service ID
+              <input name="serviceId" />
+            </label>
+            <label>
+              Contact template ID
+              <input name="templateId" />
+            </label>
+            <label>
+              Admin invite/reset template ID
+              <input name="adminTemplateId" />
+            </label>
+            <label>
+              Public key
+              <input name="publicKey" />
+            </label>
+            <label>
+              Private key / access token
+              <input name="privateKey" type="password" autocomplete="new-password" />
+            </label>
+            <button class="button button-primary" type="submit">Save EmailJS</button>
+            <p class="admin-message" data-settings-message="emailjs" role="status"></p>
+          </form>
+        </section>
+
+        <section class="admin-panel" data-tab-panel="ai" hidden>
+          <div class="panel-heading">
+            <div>
+              <p class="kicker">AI writing</p>
+              <h2>Connect OpenAI for admin page and project drafting.</h2>
+            </div>
+          </div>
+          <form class="admin-form settings-form" data-settings-form="ai">
+            <label class="checkbox-row">
+              <input type="checkbox" name="aiEnabled" />
+              Enable AI drafting
+            </label>
+            <label>
+              OpenAI API key
+              <input name="openAiKey" type="password" autocomplete="new-password" />
+            </label>
+            <label>
+              Model
+              <input name="model" placeholder="gpt-4.1-mini" />
+            </label>
+            <button class="button button-primary" type="submit">Save AI settings</button>
+            <p class="admin-message" data-settings-message="ai" role="status"></p>
+          </form>
+        </section>
+
+        <section class="admin-panel" data-tab-panel="users" hidden>
+          <div class="panel-heading">
+            <div>
+              <p class="kicker">Admin users</p>
+              <h2>Super Admin assigns who can change what.</h2>
+            </div>
+          </div>
+          <div class="role-grid" data-role-grid></div>
+          <form class="admin-form settings-form user-editor" data-user-form>
+            <label>
+              Admin name
+              <input name="name" placeholder="Team member name" />
+            </label>
+            <label>
+              Admin email
+              <input name="email" type="email" placeholder="editor@synteone.com" />
+            </label>
+            <label>
+              Password
+              <input name="password" type="password" autocomplete="new-password" />
+            </label>
+            <label>
+              Access type
+              <select name="role">
+                <option value="super_admin">Super Admin</option>
+                <option value="content_admin">Content Admin</option>
+                <option value="marketing_admin">Marketing Admin</option>
+                <option value="viewer_admin">Viewer Admin</option>
+              </select>
+            </label>
+            <label class="checkbox-row">
+              <input type="checkbox" name="active" checked />
+              Active account
+            </label>
+            <div class="admin-actions">
+              <button class="button button-primary" type="submit">Save admin</button>
+              <button class="button button-secondary" type="button" data-invite-user>Invite admin</button>
+              <button class="button button-secondary" type="button" data-new-user>New admin</button>
+              <button class="button button-secondary" type="button" data-delete-user>Delete admin</button>
+            </div>
+            <p class="admin-message" data-user-message role="status"></p>
+          </form>
+          <div class="admin-table-wrap">
+            <table class="admin-table">
+              <thead>
+                <tr>
+                  <th>Name</th>
+                  <th>Email</th>
+                  <th>Access</th>
+                  <th>Status</th>
+                  <th>Last updated</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody data-admin-users></tbody>
+            </table>
+          </div>
+        </section>
+
+        <section class="admin-preview" data-preview-panel hidden>
+          <div class="panel-heading">
+            <div>
+              <p class="kicker">Preview</p>
+              <h2 data-preview-title>Site preview</h2>
+            </div>
+            <div class="admin-actions">
+              <button class="button button-secondary" type="button" data-open-preview>Open full preview</button>
+              <button class="button button-secondary" type="button" data-close-preview>Close preview</button>
+            </div>
+          </div>
+          <iframe class="preview-frame" data-preview-frame title="Synteone site preview"></iframe>
+        </section>
+      </section>
+    </main>
+
+    <div class="modal-backdrop" data-project-modal hidden>
+      <section class="modal" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+        <header class="modal-header">
+          <div>
+            <p class="kicker" data-step-label>Step 1 of 4</p>
+            <h2 id="modal-title" data-step-title>What is the project called?</h2>
+          </div>
+          <button class="icon-button" type="button" data-close-modal aria-label="Close project editor">x</button>
+        </header>
+
+        <form class="modal-body" data-project-form>
+          <section class="modal-step" data-step="1">
+            <label>
+              Project name
+              <input name="name" required />
+            </label>
+          </section>
+
+          <section class="modal-step" data-step="2" hidden>
+            <fieldset class="status-choice">
+              <legend>Is this a current project or an upcoming project?</legend>
+              <label>
+                <input type="radio" name="status" value="current" required />
+                <span>Current</span>
+              </label>
+              <label>
+                <input type="radio" name="status" value="upcoming" required />
+                <span>Upcoming</span>
+              </label>
+            </fieldset>
+          </section>
+
+          <section class="modal-step details-step" data-step="3" hidden>
+            <label>
+              Short description
+              <textarea name="shortDescription" rows="3" required></textarea>
+            </label>
+            <label>
+              Longer description
+              <textarea name="longDescription" rows="5"></textarea>
+            </label>
+            <label>
+              Optional image or logo path
+              <input name="image" placeholder="assets/example.png" />
+            </label>
+            <label>
+              Optional external link
+              <input name="link" type="url" placeholder="https://example.com" />
+            </label>
+
+            <div class="ai-helper">
+              <div>
+                <h3>AI description helper</h3>
+                <p>Paste a source website URL or text. The server drafts project copy in our voice.</p>
+              </div>
+              <label>
+                Source website URL
+                <input name="sourceUrl" type="url" placeholder="https://example.com" />
+              </label>
+              <label>
+                Source text
+                <textarea name="sourceText" rows="4" placeholder="Paste notes or text from another site"></textarea>
+              </label>
+              <button class="button button-secondary" type="button" data-ai-draft>Draft with AI</button>
+              <p class="admin-message" data-ai-message role="status"></p>
+            </div>
+          </section>
+
+          <section class="modal-step" data-step="4" hidden>
+            <div class="review-box" data-review-box></div>
+          </section>
+
+          <footer class="modal-footer">
+            <button class="button button-secondary" type="button" data-prev-step>Back</button>
+            <button class="button button-primary" type="button" data-next-step>Next</button>
+            <button class="button button-primary" type="submit" data-save-project hidden>Publish</button>
+          </footer>
+        </form>
+      </section>
+    </div>
+
+    <script src="admin.js"></script>
+  </body>
+</html>
