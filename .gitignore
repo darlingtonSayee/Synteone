@@ -8,3 +8,5 @@ uploads/
 assets/synteone-hero.png
 assets/gotravel/
 dist/
+admin-login.local.txt
+.wrangler/

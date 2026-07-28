@@ -1,3 +1,9 @@
 name = "synteone"
 compatibility_date = "2026-07-28"
 pages_build_output_dir = "dist"
+
+[[d1_databases]]
+binding = "DB"
+database_name = "synteone-cms"
+database_id = "4ba58943-3a59-4e0b-b190-01263c671560"
+migrations_dir = "migrations"
