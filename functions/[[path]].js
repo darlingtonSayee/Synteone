@@ -1126,12 +1126,8 @@ export async function onRequest(context) {
       return await handleApi(env, request, url);
     }
 
-    if (url.hostname.toLowerCase().startsWith("admin.") && (url.pathname === "/" || url.pathname === "/admin")) {
-      return Response.redirect(new URL("/admin.html", request.url), 302);
-    }
-
-    if (url.pathname === "/admin") {
-      return Response.redirect(new URL("/admin.html", request.url), 302);
+    if (url.hostname.toLowerCase().startsWith("admin.") && url.pathname === "/") {
+      return Response.redirect(new URL("/admin", request.url), 302);
     }
 
     return context.next();
