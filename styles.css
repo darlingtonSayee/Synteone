@@ -87,9 +87,10 @@ textarea {
 .wordmark {
   display: inline-flex;
   width: fit-content;
-  align-items: baseline;
+  min-height: 52px;
+  align-items: center;
   color: var(--blue);
-  font-size: 1.08rem;
+  font-size: 1.34rem;
   letter-spacing: 0;
   line-height: 1;
   text-decoration: none;
@@ -307,7 +308,10 @@ h3 {
 .center-dot {
   width: clamp(94px, 14vw, 160px);
   height: clamp(94px, 14vw, 160px);
-  background: var(--blue);
+  border: 0;
+  background:
+    url("assets/logo-system/svg/icon-logo-mark_full-color.svg") center / 72% auto no-repeat,
+    var(--white);
 }
 
 .section,
@@ -622,6 +626,11 @@ h3 {
 
 .site-footer .wordmark {
   flex: 0 0 auto;
+}
+
+.site-footer a,
+.site-footer p {
+  font-size: 1rem;
 }
 
 .admin-body {
@@ -1028,9 +1037,26 @@ body {
 
 .wordmark-image {
   width: auto;
-  max-width: 168px;
-  height: 36px;
+  max-width: 246px;
+  height: 54px;
   object-fit: contain;
+}
+
+.site-footer .wordmark-image {
+  max-width: 286px;
+  height: 64px;
+}
+
+.admin-login .wordmark-image,
+.admin-topbar .wordmark-image {
+  max-width: 260px;
+  height: 58px;
+}
+
+.brand-icon-fallback {
+  width: min(128px, 45%);
+  min-width: 86px;
+  margin-bottom: 16px;
 }
 
 .hero::before {

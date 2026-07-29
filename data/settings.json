@@ -14,7 +14,7 @@
   "media": {
     "logoUrl": "assets/logo-system/svg/primary-logo-landscape_full-color.svg",
     "heroVideoUrl": "",
-    "socialImageUrl": "assets/logo-system/svg/social-cover-landscape_full-color.svg"
+    "socialImageUrl": "assets/logo-system/png/social-profile-square_full-color.png"
   },
   "advertisement": {
     "enabled": false,

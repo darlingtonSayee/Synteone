@@ -26,6 +26,8 @@ const companyAd = document.querySelector("[data-company-ad]");
 const customPageRoot = document.querySelector("[data-custom-page]");
 const contactForm = document.querySelector("[data-contact-form]");
 const contactMessage = document.querySelector("[data-contact-message]");
+const brandLogoUrl = "assets/logo-system/svg/primary-logo-landscape_full-color.svg";
+const brandIconUrl = "assets/logo-system/svg/icon-logo-mark_full-color.svg";
 const previewSettings =
   new URLSearchParams(window.location.search).get("preview") === "settings"
     ? JSON.parse(localStorage.getItem("synteoneSettingsPreview") || "null")
@@ -44,10 +46,10 @@ const getSetting = (settings, path) =>
   path.split(".").reduce((current, key) => current?.[key], settings);
 
 const applyLogo = (logoUrl) => {
-  if (!logoUrl) return;
+  const source = logoUrl || brandLogoUrl;
   document.querySelectorAll(".wordmark").forEach((wordmark) => {
     const image = document.createElement("img");
-    image.src = logoUrl;
+    image.src = source;
     image.alt = "Synteone";
     image.className = "wordmark-image";
     wordmark.replaceChildren(image);
@@ -150,11 +152,13 @@ const addPublishedPagesToNav = async () => {
   }
 };
 
-const appendImage = (root, src, alt = "") => {
-  if (!src) return;
+const appendImage = (root, src, alt = "", fallbackSrc = "") => {
+  const source = src || fallbackSrc;
+  if (!source) return;
   const image = document.createElement("img");
-  image.src = src;
+  image.src = source;
   image.alt = alt;
+  if (!src && fallbackSrc) image.className = "brand-icon-fallback";
   root.append(image);
 };
 
@@ -233,7 +237,7 @@ const renderStructuredPageContent = (body, page) => {
   appendCards(body, page.pageProjects, "content-card-grid", (project) => {
     const card = document.createElement("article");
     card.className = "content-card";
-    appendImage(card, project.image, project.name);
+    appendImage(card, project.image, project.name, brandIconUrl);
     const status = document.createElement("span");
     status.textContent = [project.category, project.status].filter(Boolean).join(" - ");
     const title = document.createElement("h2");
@@ -393,12 +397,11 @@ const loadProjects = async () => {
         link.remove();
       }
 
-      if (project.image) {
-        const image = document.createElement("img");
-        image.src = project.image;
-        image.alt = `${project.name} logo`;
-        card.insertBefore(image, card.querySelector("h2"));
-      }
+      const image = document.createElement("img");
+      image.src = project.image || brandIconUrl;
+      image.alt = `${project.name || "Synteone project"} logo`;
+      if (!project.image) image.className = "brand-icon-fallback";
+      card.insertBefore(image, card.querySelector("h2"));
 
       projectList.append(card);
       revealObserver.observe(card);
@@ -437,6 +440,7 @@ const handleContactForm = () => {
   });
 };
 
+applyLogo(brandLogoUrl);
 loadSiteSettings();
 addPublishedPagesToNav();
 renderCustomPage();

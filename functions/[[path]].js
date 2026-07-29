@@ -33,7 +33,7 @@ const defaultSettings = {
   media: {
     logoUrl: "assets/logo-system/svg/primary-logo-landscape_full-color.svg",
     heroVideoUrl: "",
-    socialImageUrl: "assets/logo-system/svg/social-cover-landscape_full-color.svg",
+    socialImageUrl: "assets/logo-system/png/social-profile-square_full-color.png",
   },
   advertisement: {
     enabled: false,
@@ -157,7 +157,10 @@ const sha256 = async (value) => {
   return base64UrlEncode(digest);
 };
 
-const hashPassword = async (password, salt) => {
+const passwordHashIterations = 100000;
+const legacyPasswordHashIterations = 210000;
+
+const hashPassword = async (password, salt, iterations = passwordHashIterations) => {
   const key = await crypto.subtle.importKey(
     "raw",
     new TextEncoder().encode(password),
@@ -170,7 +173,7 @@ const hashPassword = async (password, salt) => {
       name: "PBKDF2",
       hash: "SHA-256",
       salt: new TextEncoder().encode(salt),
-      iterations: 210000,
+      iterations,
     },
     key,
     256,
@@ -180,16 +183,23 @@ const hashPassword = async (password, salt) => {
 
 const createPasswordHash = async (password) => {
   const salt = randomToken(16);
-  return `${salt}:${await hashPassword(password, salt)}`;
+  return `${salt}:${passwordHashIterations}:${await hashPassword(password, salt)}`;
 };
 
 const verifyPassword = async (password, user) => {
   const passwordHash = user.passwordHash || "";
   if (!passwordHash) return password === (user.password || "");
-  const [salt, expected] = passwordHash.split(":");
+  const [salt, storedIterations, storedHash] = passwordHash.split(":");
+  const iterations = storedHash ? Number(storedIterations) : passwordHashIterations;
+  const expected = storedHash || storedIterations;
   if (!salt || !expected) return false;
-  const actual = await hashPassword(password, salt);
-  return actual === expected;
+  if (Number.isFinite(iterations) && iterations > 0) {
+    const actual = await hashPassword(password, salt, iterations).catch(() => "");
+    if (actual === expected) return true;
+  }
+  if (storedHash) return false;
+  const legacyActual = await hashPassword(password, salt, legacyPasswordHashIterations).catch(() => "");
+  return legacyActual === expected;
 };
 
 const parseCookies = (request) =>
@@ -501,8 +511,31 @@ const cleanContactMessage = (body, request) => ({
   ip: request.headers.get("CF-Connecting-IP") || "",
   userAgent: request.headers.get("User-Agent") || "",
   emailSent: false,
+  emailStatus: "",
   createdAt: new Date().toISOString(),
 });
+
+const emailTemplateParams = (message) => {
+  const fromName = message.from_name || message.name || "Website visitor";
+  const fromEmail = message.from_email || message.email || "";
+  const toEmail = message.to_email || "info@Synteone.com";
+  const subject = message.subject || "Website enquiry";
+  return {
+    company_name: "Synteone",
+    site_name: "Synteone",
+    submitted_at: new Date().toISOString(),
+    name: fromName,
+    email: fromEmail,
+    from_name: fromName,
+    from_email: fromEmail,
+    reply_to: fromEmail,
+    to_name: message.to_name || "Synteone",
+    to_email: toEmail,
+    subject,
+    title: message.headline || subject,
+    ...message,
+  };
+};
 
 const readJson = async (request) => {
   const text = await request.text();
@@ -533,18 +566,22 @@ const sendViaEmailJs = async (settings, message, templateIdOverride = "") => {
     return { sent: false, reason: "EmailJS is not configured" };
   }
 
+  const payload = {
+    service_id: String(emailjs.serviceId).trim(),
+    template_id: String(templateId).trim(),
+    user_id: String(emailjs.publicKey).trim(),
+    template_params: emailTemplateParams(message),
+  };
+  if (emailjs.privateKey) payload.accessToken = String(emailjs.privateKey).trim();
+
   const response = await fetch("https://api.emailjs.com/api/v1.0/email/send", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({
-      service_id: emailjs.serviceId,
-      template_id: templateId,
-      user_id: emailjs.publicKey,
-      accessToken: emailjs.privateKey || undefined,
-      template_params: message,
-    }),
+    body: JSON.stringify(payload),
   });
-  return { sent: response.ok, reason: response.ok ? "OK" : await response.text() };
+  if (response.ok) return { sent: true, reason: "OK" };
+  const reason = await response.text().catch(() => response.statusText);
+  return { sent: false, reason: `EmailJS ${response.status}: ${reason || response.statusText}`.slice(0, 300) };
 };
 
 const fetchSourceText = async (sourceUrl) => {
@@ -730,6 +767,8 @@ const handleApi = async (env, request, url) => {
     }
     const settings = await loadSettings(env);
     const emailResult = await sendViaEmailJs(settings, {
+      name: message.name,
+      email: message.email,
       from_name: message.name,
       from_email: message.email,
       phone: message.phone,
@@ -808,6 +847,7 @@ const handleApi = async (env, request, url) => {
     const users = await loadAdminUsers(env);
     const index = users.findIndex((user) => user.email === String(body.email || "").trim());
     let resetLink = "";
+    let emailResult = { sent: false, reason: "Admin email was not found" };
     if (index !== -1) {
       const token = randomToken(32);
       users[index].resetHash = await sha256(token);
@@ -816,8 +856,9 @@ const handleApi = async (env, request, url) => {
       await saveAdminUsers(env, users);
       resetLink = buildActionLink(request, "reset", token);
       const settings = await loadSettings(env);
-      await sendViaEmailJs(settings, {
+      emailResult = await sendViaEmailJs(settings, {
         to_email: users[index].email,
+        to_name: users[index].name || users[index].email,
         reset_link: resetLink,
         action_link: resetLink,
         action_label: "Reset password",
@@ -826,7 +867,12 @@ const handleApi = async (env, request, url) => {
         message: `Use this secure link to reset your Synteone admin password: ${resetLink}`,
       }, settings.emailjs.adminTemplateId).catch(() => ({ sent: false }));
     }
-    return json({ ok: true, resetLink });
+    return json({
+      ok: true,
+      emailSent: index === -1 ? true : emailResult.sent,
+      emailStatus: emailResult.reason,
+      resetLink: emailResult.sent ? "" : resetLink,
+    });
   }
 
   if (request.method === "POST" && url.pathname === "/api/admin/password-reset/complete") {
@@ -975,8 +1021,9 @@ const handleApi = async (env, request, url) => {
     await saveAdminUsers(env, users);
     const inviteLink = buildActionLink(request, "invite", token);
     const settings = await loadSettings(env);
-    await sendViaEmailJs(settings, {
+    const emailResult = await sendViaEmailJs(settings, {
       to_email: user.email,
+      to_name: user.name || user.email,
       invite_link: inviteLink,
       action_link: inviteLink,
       action_label: "Activate account",
@@ -984,7 +1031,7 @@ const handleApi = async (env, request, url) => {
       subject: "You have been invited to Synteone Admin",
       message: `Use this secure link to activate your Synteone admin account: ${inviteLink}`,
     }, settings.emailjs.adminTemplateId).catch(() => ({ sent: false }));
-    return json({ user: publicUser(user), inviteLink }, 201);
+    return json({ user: publicUser(user), inviteLink, emailSent: emailResult.sent, emailStatus: emailResult.reason }, 201);
   }
 
   const adminUserMatch = url.pathname.match(/^\/api\/admin\/users\/([^/]+)$/);

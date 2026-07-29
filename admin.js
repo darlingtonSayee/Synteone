@@ -105,6 +105,19 @@ const setMessage = (element, message) => {
   if (element) element.textContent = message || "";
 };
 
+const emailjsStatusText = (emailjs = {}) => {
+  const required = [
+    ["Service ID", emailjs.serviceId],
+    ["Contact template", emailjs.templateId],
+    ["Admin invite/reset template", emailjs.adminTemplateId],
+    ["Public key", emailjs.publicKey],
+  ];
+  const missing = required.filter(([, value]) => !String(value || "").trim()).map(([label]) => label);
+  if (!emailjs.enabled) return "EmailJS is disabled. Contact messages will be saved in admin only.";
+  if (missing.length) return `EmailJS needs: ${missing.join(", ")}.`;
+  return "EmailJS is ready for contact, invitation, and password reset emails.";
+};
+
 const tableButton = (label, onClick, className = "") => {
   const button = document.createElement("button");
   button.className = `table-button ${className}`.trim();
@@ -482,6 +495,7 @@ const populateSettingsForms = () => {
   emailjs.elements.adminTemplateId.value = settings.emailjs?.adminTemplateId || "";
   emailjs.elements.publicKey.value = settings.emailjs?.publicKey || "";
   emailjs.elements.privateKey.value = settings.emailjs?.privateKey || "";
+  setMessage($("[data-emailjs-status]"), emailjsStatusText(settings.emailjs));
 
   const ai = $("[data-settings-form='ai']");
   ai.elements.aiEnabled.checked = Boolean(settings.ai?.enabled);
@@ -886,7 +900,12 @@ const inviteUser = async () => {
     body: JSON.stringify(payload),
   });
   state.editingUserId = result.user.id;
-  setMessage($("[data-user-message]"), `Invitation created. Activation link: ${result.inviteLink}`);
+  setMessage(
+    $("[data-user-message]"),
+    result.emailSent
+      ? "Invitation email sent."
+      : `Invitation created, but email could not be delivered. Activation link: ${result.inviteLink}`,
+  );
   await loadUsers();
 };
 
@@ -936,11 +955,17 @@ loginForm.addEventListener("submit", async (event) => {
 
 $("[data-reset-request]").addEventListener("click", async () => {
   try {
-    await requestJson("/api/admin/password-reset", {
+    const result = await requestJson("/api/admin/password-reset", {
       method: "POST",
       body: JSON.stringify({ email: loginForm.elements.email.value.trim() }),
     });
-    setMessage(loginMessage, "Password reset request recorded.");
+    if (result.emailSent) {
+      setMessage(loginMessage, "Password reset email sent. Check your inbox.");
+    } else if (result.resetLink) {
+      setMessage(loginMessage, `Reset email could not be delivered, so use this secure reset link: ${result.resetLink}`);
+    } else {
+      setMessage(loginMessage, "If that admin email exists, a reset link will be sent.");
+    }
   } catch (error) {
     setMessage(loginMessage, error.message);
   }
