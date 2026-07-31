@@ -31,7 +31,7 @@ const defaultSettings = {
     linkUrl: "projects.html",
   },
   media: {
-    logoUrl: "assets/logo-system/svg/primary-logo-landscape_full-color.svg",
+    logoUrl: "assets/logo-system/svg/icon-logo-mark_full-color.svg",
     heroVideoUrl: "",
     socialImageUrl: "assets/logo-system/png/social-profile-square_full-color.png",
   },

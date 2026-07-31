@@ -26,7 +26,7 @@ const companyAd = document.querySelector("[data-company-ad]");
 const customPageRoot = document.querySelector("[data-custom-page]");
 const contactForm = document.querySelector("[data-contact-form]");
 const contactMessage = document.querySelector("[data-contact-message]");
-const brandLogoUrl = "assets/logo-system/svg/primary-logo-landscape_full-color.svg";
+const brandLogoUrl = "assets/logo-system/svg/icon-logo-mark_full-color.svg";
 const brandIconUrl = "assets/logo-system/svg/icon-logo-mark_full-color.svg";
 const previewSettings =
   new URLSearchParams(window.location.search).get("preview") === "settings"
