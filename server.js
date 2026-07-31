@@ -83,8 +83,8 @@ const roles = {
 const defaultSettings = {
   hero: {
     kicker: "ONE COMPANY - MANY BRANDS",
-    headline: "We build business software from Africa.",
-    copy: "We build focused software products for real business work, starting with the problems African teams face every day.",
+    headline: "We are an African technology company.",
+    copy: "We build innovative digital products for businesses and individuals, one focused product at a time.",
   },
   announcement: {
     enabled: false,
@@ -100,33 +100,35 @@ const defaultSettings = {
   },
   advertisement: {
     enabled: false,
-    title: "Business software built close to the work.",
-    body: "We design tools around how African businesses actually operate.",
+    title: "Digital products built close to real needs.",
+    body: "We design products around how African businesses and individuals actually live, work, and make decisions.",
     linkText: "Talk to us",
     linkUrl: "contact.html",
   },
   siteCopy: {
-    aboutHeroTitle: "We turn useful ideas into focused software.",
+    aboutHeroTitle: "We turn useful ideas into focused digital products.",
     aboutHeroIntro:
       "Synteone comes from synthesis and one. We bring many ideas into one company, then give each product the focus it needs to become useful and trusted.",
     aboutRegisteredText: "We are registered in Rwanda and building for African markets.",
     productsHeroTitle: "We build products when the problem is clear.",
-    productsHeroIntro: "We create focused software products for teams that need clearer, more confident ways to work.",
+    productsHeroIntro: "We create innovative digital products for businesses and individuals, then give each product our full focus until it is proven.",
     homeWhatKicker: "What we do",
-    homeWhatTitle: "We build around the way our customers actually work.",
+    homeWhatTitle: "We build digital products across the markets people use every day.",
     homeWhatBody:
-      "We are a business software company. We build one focused product at a time, starting with the problems African businesses and individuals face every day.",
+      "We build innovative digital products for businesses and individuals, spanning technology, financial services, hospitality and tourism, real estate, and retail and commerce.",
     homeWhyKicker: "Why from Africa",
     homeWhyTitle: "We build close to the market we serve.",
     homeWhyBodyOne:
-      "Our customers need software that respects local operating realities, customer behavior, payment habits, and trust gaps.",
+      "Our customers need digital products that respect local operating realities, customer behavior, payment habits, and trust gaps.",
     homeWhyBodyTwo: "We compete on trust and genuine relevance, not on being the cheapest option.",
     homePrinciplesKicker: "Vision, mission, values",
     homePrinciplesTitle: "We keep our principles clear.",
-    homeVision: "To be known for solving real problems well - one at a time, one company at a time.",
+    homeVision:
+      "To become a leading African technology company, creating trusted digital products that improve how people live, work, and do business across Africa and beyond.",
     homeMission:
-      "We build focused software that solves real problems and makes everyday life easier, starting in Africa and expanding internationally.",
-    homeValues: "Innovation\nIntegrity\nCustomer Focus\nExcellence\nAccountability\nSustainable Growth",
+      "Synteone builds innovative digital products that solve real problems for businesses and individuals, starting in Africa.",
+    homeValues:
+      "Innovation\nTrust\nCustomer Success\nSimplicity\nExcellence\nIntegrity\nCollaboration\nContinuous Improvement\nAfrican Innovation with Global Standards",
     homeProjectsKicker: "Projects",
     homeProjectsTitle: "Our current work lives in one place.",
     projectsHeroTitle: "We will share our products when they are ready.",
@@ -634,7 +636,7 @@ const aiDraft = async ({ name, status, sourceText }) => {
   const prompt = [
     "Write public website copy for a Synteone project card.",
     "Voice: direct, confident, plain. No hype. No competitor names.",
-    "Synteone is a business software company built from Africa.",
+    "Synteone is an African technology company that builds innovative digital products for businesses and individuals.",
     "Return only JSON with shortDescription and longDescription.",
     `Project name: ${name || "Unnamed project"}`,
     `Project status: ${status || "current"}`,

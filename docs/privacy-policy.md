@@ -4,7 +4,7 @@ Last updated July 28, 2026
 
 ## Who We Are
 
-Synteone is operated by SYNTEONE LTD in Rwanda. We build business software and use this website to share company information, product updates, and ways to contact us.
+Synteone is operated by SYNTEONE LTD in Rwanda. We build innovative digital products for businesses and individuals and use this website to share company information, product updates, and ways to contact us.
 
 ## Information We Collect Directly
 
