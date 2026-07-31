@@ -520,7 +520,7 @@ const cleanContactMessage = (body, request) => ({
 const emailTemplateParams = (message) => {
   const fromName = message.from_name || message.name || "Website visitor";
   const fromEmail = message.from_email || message.email || "";
-  const toEmail = message.to_email || "info@Synteone.com";
+  const toEmail = message.to_email || "info@synteone.com";
   const subject = message.subject || "Website enquiry";
   return {
     company_name: "Synteone",
@@ -776,7 +776,7 @@ const handleApi = async (env, request, url) => {
       phone: message.phone,
       subject: message.subject,
       message: message.message,
-      to_email: "info@Synteone.com",
+      to_email: "info@synteone.com",
     }).catch((error) => ({ sent: false, reason: error.message }));
     message.emailSent = emailResult.sent;
     message.emailStatus = emailResult.reason;
