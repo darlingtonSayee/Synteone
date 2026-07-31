@@ -77,7 +77,7 @@ textarea {
   grid-template-columns: 1fr auto 1fr;
   gap: 22px;
   align-items: center;
-  min-height: 96px;
+  min-height: 132px;
   padding: 0 var(--gutter);
   border-bottom: 1px solid rgba(138, 141, 145, 0.24);
   background: rgba(255, 255, 255, 0.94);
@@ -87,7 +87,7 @@ textarea {
 .wordmark {
   display: inline-flex;
   width: fit-content;
-  min-height: 78px;
+  min-height: 114px;
   align-items: center;
   color: var(--blue);
   font-size: 1.34rem;
@@ -142,7 +142,7 @@ textarea {
   grid-template-columns: minmax(0, 0.92fr) minmax(320px, 0.8fr);
   gap: clamp(34px, 7vw, 96px);
   width: min(var(--max), calc(100% - (var(--gutter) * 2)));
-  min-height: calc(100vh - 96px);
+  min-height: calc(100vh - 132px);
   margin: 0 auto;
   padding: clamp(72px, 10vw, 130px) 0 clamp(44px, 7vw, 86px);
   align-items: center;
@@ -1066,19 +1066,19 @@ body {
 .wordmark-image {
   width: auto;
   max-width: 350px;
-  height: 86px;
+  height: 118px;
   object-fit: contain;
 }
 
 .site-footer .wordmark-image {
-  max-width: 380px;
-  height: 94px;
+  max-width: 420px;
+  height: 132px;
 }
 
 .admin-login .wordmark-image,
 .admin-topbar .wordmark-image {
   max-width: 350px;
-  height: 86px;
+  height: 118px;
 }
 
 .brand-icon-fallback {
@@ -1486,5 +1486,21 @@ h1 {
   .announcement {
     align-items: flex-start;
     flex-direction: column;
+  }
+
+  .wordmark {
+    min-height: 102px;
+  }
+
+  .wordmark-image,
+  .admin-login .wordmark-image,
+  .admin-topbar .wordmark-image {
+    max-width: min(360px, calc(100vw - 32px));
+    height: 104px;
+  }
+
+  .site-footer .wordmark-image {
+    max-width: min(370px, calc(100vw - 32px));
+    height: 110px;
   }
 }
