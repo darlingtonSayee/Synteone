@@ -55,7 +55,14 @@ const applyLogo = (logoUrl) => {
 
     const name = document.createElement("span");
     name.className = "wordmark-name";
-    name.textContent = "Synteone";
+
+    const lead = document.createElement("span");
+    lead.textContent = "SYNTE";
+
+    const one = document.createElement("strong");
+    one.textContent = "ONE";
+
+    name.replaceChildren(lead, one);
 
     wordmark.replaceChildren(image, name);
   });

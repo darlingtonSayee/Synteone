@@ -1072,12 +1072,17 @@ body {
 }
 
 .wordmark-name {
-  color: var(--blue);
+  color: #6f7d8d;
   font-size: 0.9rem;
   font-weight: 900;
   letter-spacing: 0;
   line-height: 1;
   text-transform: none;
+}
+
+.wordmark-name strong {
+  color: var(--blue);
+  font-weight: 950;
 }
 
 .site-footer .wordmark-image {
