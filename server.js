@@ -97,6 +97,14 @@ const defaultSettings = {
     logoUrl: "assets/logo-system/svg/icon-logo-mark_full-color.svg",
     heroVideoUrl: "",
     socialImageUrl: "assets/logo-system/png/social-profile-square_full-color.png",
+    socialLinks: {
+      facebook: "",
+      instagram: "",
+      linkedin: "",
+      x: "",
+      youtube: "",
+      tiktok: "",
+    },
   },
   advertisement: {
     enabled: false,
@@ -300,7 +308,14 @@ const saveProjects = async (projects) => {
 const mergeSettings = (settings) => ({
   hero: { ...defaultSettings.hero, ...(settings.hero || {}) },
   announcement: { ...defaultSettings.announcement, ...(settings.announcement || {}) },
-  media: { ...defaultSettings.media, ...(settings.media || {}) },
+  media: {
+    ...defaultSettings.media,
+    ...(settings.media || {}),
+    socialLinks: {
+      ...defaultSettings.media.socialLinks,
+      ...(settings.media?.socialLinks || {}),
+    },
+  },
   advertisement: { ...defaultSettings.advertisement, ...(settings.advertisement || {}) },
   siteCopy: { ...defaultSettings.siteCopy, ...(settings.siteCopy || {}) },
   emailjs: { ...defaultSettings.emailjs, ...(settings.emailjs || {}) },

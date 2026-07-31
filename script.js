@@ -45,6 +45,46 @@ const setText = (root, selector, value) => {
 const getSetting = (settings, path) =>
   path.split(".").reduce((current, key) => current?.[key], settings);
 
+const socialProfiles = [
+  {
+    key: "facebook",
+    label: "Facebook",
+    path: "M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3.3l.7-4h-4V7a1 1 0 0 1 1-1h3V2z",
+  },
+  {
+    key: "instagram",
+    label: "Instagram",
+    path: "M7 2h10a5 5 0 0 1 5 5v10a5 5 0 0 1-5 5H7a5 5 0 0 1-5-5V7a5 5 0 0 1 5-5zm5 5.3a4.7 4.7 0 1 0 0 9.4 4.7 4.7 0 0 0 0-9.4zm0 2a2.7 2.7 0 1 1 0 5.4 2.7 2.7 0 0 1 0-5.4zm5.2-2.6a1.1 1.1 0 1 0 0 2.2 1.1 1.1 0 0 0 0-2.2z",
+  },
+  {
+    key: "linkedin",
+    label: "LinkedIn",
+    path: "M4.98 3.5C4.98 4.88 3.86 6 2.5 6S0 4.88 0 3.5 1.12 1 2.5 1s2.48 1.12 2.48 2.5zM.5 8h4v14h-4V8zm7 0h3.8v1.9h.1c.5-1 1.8-2.2 3.8-2.2 4 0 4.8 2.6 4.8 6V22h-4v-7.4c0-1.8 0-4-2.4-4s-2.8 1.9-2.8 3.9V22h-4V8z",
+  },
+  {
+    key: "x",
+    label: "X",
+    path: "M18.9 2h3.1l-6.8 7.8L23.2 22h-6.3l-4.9-7.4L6.3 22H3.2l7.3-8.4L2.8 2h6.5l4.4 6.7L18.9 2zm-1.1 17.8h1.7L8.4 4.1H6.6l11.2 15.7z",
+  },
+  {
+    key: "youtube",
+    label: "YouTube",
+    path: "M23.5 7.1a3 3 0 0 0-2.1-2.1C19.5 4.5 12 4.5 12 4.5s-7.5 0-9.4.5A3 3 0 0 0 .5 7.1 31.3 31.3 0 0 0 0 12a31.3 31.3 0 0 0 .5 4.9 3 3 0 0 0 2.1 2.1c1.9.5 9.4.5 9.4.5s7.5 0 9.4-.5a3 3 0 0 0 2.1-2.1A31.3 31.3 0 0 0 24 12a31.3 31.3 0 0 0-.5-4.9zM9.6 15.5v-7l6.2 3.5-6.2 3.5z",
+  },
+  {
+    key: "tiktok",
+    label: "TikTok",
+    path: "M16.8 2c.4 3 2.1 4.8 5.2 5v3.4a9 9 0 0 1-5.1-1.6v6.5c0 4.2-2.5 6.7-6.4 6.7a6.2 6.2 0 0 1-6.5-6.1 6.2 6.2 0 0 1 7.8-6v3.6c-.5-.2-.9-.3-1.4-.3a2.6 2.6 0 0 0-2.7 2.7 2.5 2.5 0 0 0 2.7 2.6c1.6 0 2.7-.9 2.7-3V2h3.7z",
+  },
+];
+
+const normalizeUrl = (url) => {
+  const value = String(url || "").trim();
+  if (!value) return "";
+  if (/^(https?:|mailto:|tel:)/i.test(value)) return value;
+  return `https://${value.replace(/^\/+/, "")}`;
+};
+
 const applyLogo = (logoUrl) => {
   const source = logoUrl || brandLogoUrl;
   document.querySelectorAll(".wordmark").forEach((wordmark) => {
@@ -102,6 +142,49 @@ const applyAdvertisement = (advertisement) => {
   }
 };
 
+const applyCompanySocialLinks = (socialLinks = {}) => {
+  const links = socialProfiles
+    .map((profile) => ({ ...profile, url: normalizeUrl(socialLinks[profile.key]) }))
+    .filter((profile) => profile.url);
+  const containers = [...document.querySelectorAll("[data-company-social]")];
+
+  if (!containers.length) {
+    document.querySelectorAll(".site-footer > div").forEach((footerContent) => {
+      const container = document.createElement("div");
+      container.className = "company-social-links";
+      container.dataset.companySocial = "";
+      footerContent.append(container);
+      containers.push(container);
+    });
+  }
+
+  containers.forEach((container) => {
+    container.classList.add("company-social-links");
+    container.replaceChildren();
+    container.hidden = links.length === 0;
+    links.forEach((profile) => {
+      const anchor = document.createElement("a");
+      anchor.className = "company-social-link";
+      anchor.href = profile.url;
+      anchor.target = "_blank";
+      anchor.rel = "noopener noreferrer";
+      anchor.setAttribute("aria-label", `Synteone on ${profile.label}`);
+      anchor.title = profile.label;
+
+      const icon = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+      icon.setAttribute("viewBox", "0 0 24 24");
+      icon.setAttribute("aria-hidden", "true");
+      icon.setAttribute("focusable", "false");
+
+      const path = document.createElementNS("http://www.w3.org/2000/svg", "path");
+      path.setAttribute("d", profile.path);
+      icon.append(path);
+      anchor.append(icon);
+      container.append(anchor);
+    });
+  });
+};
+
 const loadSiteSettings = async () => {
   try {
     let settings = previewSettings;
@@ -134,6 +217,7 @@ const loadSiteSettings = async () => {
     applyLogo(settings.media?.logoUrl);
     applyAnnouncement(settings.announcement);
     applyAdvertisement(settings.advertisement);
+    applyCompanySocialLinks(settings.media?.socialLinks);
 
     if (siteVideo && settings.media?.heroVideoUrl) {
       siteVideo.src = settings.media.heroVideoUrl;

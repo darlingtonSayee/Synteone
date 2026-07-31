@@ -14,7 +14,15 @@
   "media": {
     "logoUrl": "assets/logo-system/svg/icon-logo-mark_full-color.svg",
     "heroVideoUrl": "",
-    "socialImageUrl": "assets/logo-system/png/social-profile-square_full-color.png"
+    "socialImageUrl": "assets/logo-system/png/social-profile-square_full-color.png",
+    "socialLinks": {
+      "facebook": "",
+      "instagram": "",
+      "linkedin": "",
+      "x": "",
+      "youtube": "",
+      "tiktok": ""
+    }
   },
   "advertisement": {
     "enabled": false,

@@ -398,6 +398,14 @@ const collectSettings = (section) => {
       logoUrl: formValue(form, "logoUrl"),
       heroVideoUrl: formValue(form, "heroVideoUrl"),
       socialImageUrl: formValue(form, "socialImageUrl"),
+      socialLinks: {
+        facebook: formValue(form, "facebookUrl"),
+        instagram: formValue(form, "instagramUrl"),
+        linkedin: formValue(form, "linkedinUrl"),
+        x: formValue(form, "xUrl"),
+        youtube: formValue(form, "youtubeUrl"),
+        tiktok: formValue(form, "tiktokUrl"),
+      },
     };
   }
   if (section === "ads") {
@@ -475,6 +483,12 @@ const populateSettingsForms = () => {
   media.elements.logoUrl.value = settings.media.logoUrl || "";
   media.elements.heroVideoUrl.value = settings.media.heroVideoUrl || "";
   media.elements.socialImageUrl.value = settings.media.socialImageUrl || "";
+  media.elements.facebookUrl.value = settings.media.socialLinks?.facebook || "";
+  media.elements.instagramUrl.value = settings.media.socialLinks?.instagram || "";
+  media.elements.linkedinUrl.value = settings.media.socialLinks?.linkedin || "";
+  media.elements.xUrl.value = settings.media.socialLinks?.x || "";
+  media.elements.youtubeUrl.value = settings.media.socialLinks?.youtube || "";
+  media.elements.tiktokUrl.value = settings.media.socialLinks?.tiktok || "";
 
   const ads = $("[data-settings-form='ads']");
   ads.elements.announcementEnabled.checked = Boolean(settings.announcement.enabled);
