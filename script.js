@@ -52,7 +52,12 @@ const applyLogo = (logoUrl) => {
     image.src = source;
     image.alt = "Synteone";
     image.className = "wordmark-image";
-    wordmark.replaceChildren(image);
+
+    const name = document.createElement("span");
+    name.className = "wordmark-name";
+    name.textContent = "Synteone";
+
+    wordmark.replaceChildren(image, name);
   });
 };
 
